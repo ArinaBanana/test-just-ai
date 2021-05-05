@@ -15,12 +15,8 @@ export class ListUser extends PureComponent<ListUserProps> {
                 {
                     users.map((user, index) => (
                        <User
-                           key={user.id.value}
-                           id={user.id}
-                           name={user.name}
-                           picture={user.picture}
-                           registered={user.registered}
-                           email={user.email}
+                           key={`${user.id.name}+${user.id.value}+${user.registered.age}`}
+                           {...user}
                        />
                     ))
                 }
