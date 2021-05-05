@@ -3,9 +3,7 @@ import {User as UserProps} from "../../types/user";
 import {leadingZero} from "../../utils/leadingZero";
 
 export class User extends PureComponent<UserProps> {
-    parseDate(iso: Date) {
-        const date = new Date(iso);
-
+    parseDate(date: Date) {
         const day = date.getDate();
         const month = date.getMonth() + 1;
         const year = date.getFullYear();
