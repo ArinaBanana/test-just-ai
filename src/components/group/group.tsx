@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {User} from "../../types/user";
-import {ListUser} from "../list-user/list-user";
+import {ListUser} from "../listUser/listUser";
 
 interface GroupProps {
     groupName: string;

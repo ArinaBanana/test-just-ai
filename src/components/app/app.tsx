@@ -1,5 +1,5 @@
 import React, {PureComponent} from "react";
-import {ListGroup} from "../list-group/listGroup";
+import {ListGroup} from "../listGroup/listGroup";
 import {Favorites} from "../favorites/favorites";
 import {User} from "../../types/user";
 
