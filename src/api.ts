@@ -1,6 +1,6 @@
 import {User} from "./types/user";
 
-const PATH_DATA = "https://randomuser.me/api/?results=5000&inc=id,name,email,registered,picture";
+const PATH_DATA = "https://randomuser.me/api/?results=5000&inc=name,email,registered,picture";
 
 async function getUsers(): Promise<Array<User>> {
     const response = await fetch(PATH_DATA);

@@ -12,7 +12,7 @@ getUsers()
                 const {date: iso} = registered;
 
                 user.registered.date = new Date(iso);
-                user.localId = index;
+                user.id = index;
             });
 
             ReactDom.render(

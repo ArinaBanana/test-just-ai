@@ -1,8 +1,3 @@
-interface UserId {
-    name: string;
-    value: string;
-}
-
 interface UserName {
     first: string;
     last: string;
@@ -21,10 +16,9 @@ interface UserRegistered {
 }
 
 export interface User {
-    id: UserId;
+    id: number;
     name: UserName;
     picture: UserPicture;
     registered: UserRegistered;
     email: string;
-    localId: number;
 }
