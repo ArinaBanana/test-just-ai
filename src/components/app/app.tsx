@@ -3,6 +3,7 @@ import {ListGroup} from "../listGroup/listGroup";
 import {Favorites} from "../favorites/favorites";
 import {User} from "../../types/user";
 import {Search} from "../search/search";
+import {SearchContext} from "../../contexts/searchContext";
 
 interface AppProps {
     users: Array<User>;
@@ -52,12 +53,14 @@ export class App extends PureComponent<AppProps, AppState> {
         const {favoriteUsers, searchValue} = this.state;
 
         return (
-            <section className="app">
-                <h1 className="app__title">Список пользователей</h1>
-                <Search onChange={this.handleSearchChange} />
-                <ListGroup users={users} />
-                <Favorites favoriteUsers={favoriteUsers} />
-            </section>
+            <SearchContext.Provider value={searchValue}>
+                <section className="app">
+                    <h1 className="app__title">Список пользователей</h1>
+                    <Search onChange={this.handleSearchChange} />
+                    <ListGroup users={users} />
+                    <Favorites favoriteUsers={favoriteUsers} />
+                </section>
+            </SearchContext.Provider>
         )
     }
 }
