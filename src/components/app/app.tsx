@@ -54,7 +54,7 @@ export class App extends PureComponent<AppProps, AppState> {
         return (
             <section className="app">
                 <h1 className="app__title">Список пользователей</h1>
-                <Search value={searchValue} onChange={this.handleSearchChange} />
+                <Search onChange={this.handleSearchChange} />
                 <ListGroup users={users} />
                 <Favorites favoriteUsers={favoriteUsers} />
             </section>
