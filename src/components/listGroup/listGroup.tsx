@@ -2,15 +2,14 @@ import React, {PureComponent} from "react";
 import {User as IUser} from "../../types/user";
 import {Group as IGroup} from "../../types/group";
 import {Group} from "../group/group";
-import {Search} from "../search/search";
 import {getSortedUsers} from "../../utils/getSortedUsers";
 import {getGroupName} from "../../utils/getGroupName";
 
-interface SearchProps {
+interface ListGroupProps {
     users: Array<IUser>;
 }
 
-export class ListGroup extends PureComponent<SearchProps> {
+export class ListGroup extends PureComponent<ListGroupProps> {
     private createGroups(): Array<IGroup> {
         const {users} = this.props;
 
@@ -38,15 +37,12 @@ export class ListGroup extends PureComponent<SearchProps> {
 
         return (
             <div className="app__list-group list-group">
-                <Search />
-
                 {
                     groups.map(
                         (group, index) =>
                             <Group key={index} groupName={getGroupName(index)} users={group} />
                     )
                 }
-
             </div>
         );
     }
