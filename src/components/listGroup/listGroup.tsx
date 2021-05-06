@@ -37,7 +37,11 @@ export class ListGroup extends PureComponent<ListGroupProps> {
                 {
                     groups.map(
                         (group, index) =>
-                            <Group key={index} groupName={getGroupName(index)} users={group} />
+                            <Group
+                                key={index}
+                                groupName={getGroupName(index)}
+                                users={group}
+                            />
                     )
                 }
             </div>
