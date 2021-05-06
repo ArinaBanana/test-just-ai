@@ -12,6 +12,10 @@ export class ListGroup extends PureComponent<ListGroupProps> {
     private createGroups(): Array<IGroup> {
         const {users} = this.props;
 
+        if (users.length === 0) {
+            return [];
+        }
+
         const lastUser = users[users.length - 1];
         const {registered: {age}} = lastUser;
 
