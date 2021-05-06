@@ -1,10 +1,12 @@
-const PATH_DATA = "https://randomuser.me/api/?results=50&inc=id,name,email,registered,picture";
+import {User} from "./types/user";
 
-async function getUsers() {
+const PATH_DATA = "https://randomuser.me/api/?results=5000&inc=id,name,email,registered,picture";
+
+async function getUsers(): Promise<Array<User>> {
     const response = await fetch(PATH_DATA);
 
     if (response.status !== 200) {
-        return null;
+        throw new Error('Oops, try again later');
     }
 
     const {results} = await response.json();
