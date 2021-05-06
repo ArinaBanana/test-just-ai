@@ -26,4 +26,5 @@ export interface User {
     picture: UserPicture;
     registered: UserRegistered;
     email: string;
+    localId: number;
 }

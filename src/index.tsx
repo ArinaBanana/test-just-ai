@@ -7,11 +7,12 @@ import {User} from "./types/user";
 getUsers()
     .then(
         users => {
-            users.forEach((user: User) => {
+            users.forEach((user: User, index) => {
                 const {registered} = user;
                 const {date: iso} = registered;
 
                 user.registered.date = new Date(iso);
+                user.localId = index;
             });
 
             ReactDom.render(
