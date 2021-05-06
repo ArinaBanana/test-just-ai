@@ -42,9 +42,9 @@ export class App extends PureComponent<AppProps, AppState> {
 
         return users.filter((user) => {
             const {name: {title, first, last}} = user;
-            const joined = `${title} ${first} ${last}`;
+            const joined = `${title} ${first} ${last}`.toLowerCase();
 
-            return joined.includes(searchValue);
+            return joined.includes(searchValue.toLowerCase());
         });
     }
 
