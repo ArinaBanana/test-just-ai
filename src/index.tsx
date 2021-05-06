@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import {App} from "./components/app/app";
 import {getUsers} from "./api";
 import {User} from "./types/user";
+import {getSortedUsers} from "./utils/getSortedUsers";
 
 getUsers()
     .then(
@@ -15,8 +16,10 @@ getUsers()
                 user.id = index;
             });
 
+            const sortedUsers = getSortedUsers(users);
+
             ReactDom.render(
-                <App users={users} />,
+                <App users={sortedUsers} />,
                 document.getElementById('root')
             );
         }

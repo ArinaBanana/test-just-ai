@@ -2,7 +2,6 @@ import React, {PureComponent} from "react";
 import {User as IUser} from "../../types/user";
 import {Group as IGroup} from "../../types/group";
 import {Group} from "../group/group";
-import {getSortedUsers} from "../../utils/getSortedUsers";
 import {getGroupName} from "../../utils/getGroupName";
 
 interface ListGroupProps {
@@ -13,16 +12,14 @@ export class ListGroup extends PureComponent<ListGroupProps> {
     private createGroups(): Array<IGroup> {
         const {users} = this.props;
 
-        const sortedUsers = getSortedUsers(users);
-
-        const lastUser = sortedUsers[sortedUsers.length - 1];
+        const lastUser = users[users.length - 1];
         const {registered: {age}} = lastUser;
 
         const groupsCount = Math.ceil(age / 10);
 
         const groups: Array<IGroup> = new Array(groupsCount).fill(null).map(() => []);
 
-        return sortedUsers.reduce((groups, user) => {
+        return users.reduce((groups, user) => {
             const {registered: {age}} = user;
             const indexGroupByAge = Math.floor((age - 1) / 10);
 
