@@ -1,6 +1,7 @@
-import React, {ChangeEvent, PureComponent, SyntheticEvent} from "react";
+import React, {PureComponent, SyntheticEvent} from "react";
 import {User} from "../../types/user";
 import {ListUser} from "../listUser/listUser";
+import {SearchContext} from "../../contexts/searchContext";
 
 interface GroupProps {
     groupName: string;
@@ -20,6 +21,34 @@ export class Group extends PureComponent<GroupProps, GroupState> {
         };
 
         this.handleButtonClick = this.handleButtonClick.bind(this);
+    }
+
+    static contextType = SearchContext;
+
+    componentDidMount() {
+        const searchValue = this.context;
+
+        if (searchValue.length !== 0) {
+            this.setState({showUsers: true})
+        }
+    }
+
+    public componentDidUpdate(
+        prevProps: Readonly<GroupProps>,
+        prevState: Readonly<GroupState>,
+    ) {
+        const {showUsers} = this.state;
+        const {showUsers: prevShowUsers} = prevState;
+
+        const searchValue = this.context;
+
+        if (
+            !showUsers
+            && searchValue.length !== 0
+            && showUsers === prevShowUsers
+        ) {
+            this.setState({showUsers: true});
+        }
     }
 
     private handleButtonClick(evt: SyntheticEvent<HTMLButtonElement>) {
