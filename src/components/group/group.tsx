@@ -62,9 +62,9 @@ export class Group extends PureComponent<GroupProps, GroupState> {
         const buttonText = showUsers ? "Скрыть" : "Показать";
 
         return (
-            <div className="group">
+            <div className="list-group__group group">
                 <div className="group__name">{groupName}</div>
-                <button type="button" onClick={this.handleButtonClick}>{buttonText}</button>
+                <button className="group__button" type="button" onClick={this.handleButtonClick}>{buttonText}</button>
                 {
                     showUsers && <ListUser users={users} />
                 }

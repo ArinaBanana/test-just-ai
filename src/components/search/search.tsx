@@ -41,19 +41,19 @@ export class Search extends PureComponent<SearchProps, SearchState> {
         const {value} = this.state;
 
         return (
-            <form action="#" onSubmit={this.handleFormSubmit}>
-                <label className="list-group__search search" htmlFor="search">
+            <form className="app__form-search form-search" action="#" onSubmit={this.handleFormSubmit}>
+                <label className="form-search__label" htmlFor="search">
                     Поиск
                     <input
                         value={value}
-                        className="search__input"
+                        className="form-search__input"
                         type="text"
                         id="search"
                         onChange={this.handleInputChange}
                     />
                 </label>
 
-                <button type="submit">Искать</button>
+                <button className="form-search__button" type="submit">Искать</button>
             </form>
         );
     }

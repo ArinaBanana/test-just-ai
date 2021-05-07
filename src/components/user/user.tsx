@@ -31,7 +31,7 @@ export class User extends PureComponent<UserProps> {
         const {before, found, after} = this.getFullName(name);
 
         return(
-            <section className="user">
+            <section className="list-user__user user">
                 <img className="user__images" src={picture.medium} alt="User Avatar" />
                 <p className="user__name">
                     {before}<span style={{fontWeight: "bold"}}>{found}</span>{after}, дата регистрации: {parsed}

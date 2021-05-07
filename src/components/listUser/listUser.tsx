@@ -48,7 +48,7 @@ export class ListUser extends PureComponent<ListUserProps, ListUserState> {
         const showedCount = users.length - count;
 
         return (
-            <div className="list-user">
+            <div className="group__list-user list-user">
                 {
                     showedUsers.map((user, index) => (
                        <User
@@ -61,7 +61,7 @@ export class ListUser extends PureComponent<ListUserProps, ListUserState> {
                 {
                     showedCount > 0
                     &&
-                    <button type="button" onClick={this.handleButtonClick}>
+                    <button className="list-user__button" type="button" onClick={this.handleButtonClick}>
                         Еще {showedCount < SHOW_USERS_COUNT ? showedCount : SHOW_USERS_COUNT} пользователей
                     </button>
                 }
