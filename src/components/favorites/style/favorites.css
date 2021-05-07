@@ -2,6 +2,14 @@
   padding: 10px;
 }
 
+.favorites__list-user {
+  height: calc(100vh - 200px);
+}
+
+.favorites__list-user_draggable {
+  background-color: #e8eaf6;
+}
+
 .favorites__title {
   font-size: 20px;
   text-align: center;

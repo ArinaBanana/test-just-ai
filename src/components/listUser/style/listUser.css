@@ -1,3 +1,8 @@
+.list-user {
+  margin: 0;
+  padding: 10px 0;
+}
+
 .list-user .list-user__wrapper {
   padding-left: 0;
   padding-right: 0;

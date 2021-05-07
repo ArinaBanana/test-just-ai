@@ -4,7 +4,7 @@ import {Favorites} from "../favorites/favorites";
 import {User} from "../../types/user";
 import {Search} from "../search/search";
 import {SearchContext} from "../../contexts/searchContext";
-import {Container} from "@material-ui/core";
+import {DraggableUserContext} from "../../contexts/draggableUserContext";
 import "./style/app.css";
 
 interface AppProps {
@@ -12,8 +12,8 @@ interface AppProps {
 }
 
 interface AppState {
-    favoriteUsers: Array<User>;
     searchValue: string;
+    draggableUser: User | null;
 }
 
 export class App extends PureComponent<AppProps, AppState> {
@@ -21,11 +21,12 @@ export class App extends PureComponent<AppProps, AppState> {
         super(props);
 
         this.state = {
-            favoriteUsers: [],
-            searchValue: ""
+            searchValue: "",
+            draggableUser: null
         }
 
         this.handleSearchChange = this.handleSearchChange.bind(this);
+        this.setDraggableUser = this.setDraggableUser.bind(this);
     }
 
     private handleSearchChange(value: string) {
@@ -50,29 +51,42 @@ export class App extends PureComponent<AppProps, AppState> {
         });
     }
 
+    private setDraggableUser(draggableUser: User | null) {
+        this.setState({
+            draggableUser
+        })
+    }
+
     render() {
         const users = this.getFoundUsers();
-        const {favoriteUsers, searchValue} = this.state;
+        const {searchValue, draggableUser} = this.state;
+
+        const draggableContextValue = {
+            draggableUser,
+            setDraggableUser: this.setDraggableUser
+        }
 
         return (
-            <SearchContext.Provider value={searchValue}>
-                <section className="app">
-                    <h1 className="app__title">Список пользователей</h1>
+            <DraggableUserContext.Provider value={draggableContextValue}>
+                <SearchContext.Provider value={searchValue}>
+                    <section className="app">
+                        <h1 className="app__title">Список пользователей</h1>
 
-                    <div className="app__wrapper">
+                        <div className="app__wrapper">
 
-                        <div className="app__container-search">
-                            <Search onChange={this.handleSearchChange} />
-                            <ListGroup users={users} />
+                            <div className="app__container-search">
+                                <Search onChange={this.handleSearchChange} />
+                                <ListGroup users={users} />
+                            </div>
+
+                            <div className="app__container-favorites">
+                                <Favorites userToAdd={draggableUser} />
+                            </div>
+
                         </div>
-
-                        <div className="app__container-favorites">
-                            <Favorites favoriteUsers={favoriteUsers} />
-                        </div>
-
-                    </div>
-                </section>
-            </SearchContext.Provider>
+                    </section>
+                </SearchContext.Provider>
+            </DraggableUserContext.Provider>
         )
     }
 }
