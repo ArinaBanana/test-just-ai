@@ -1,0 +1,18 @@
+.group {
+  padding: 10px;
+}
+
+.group__name {
+  font-size: 20px;
+  color: rgba(0, 0, 0, 0.8);
+
+}
+
+.group__container {
+  display: flex;
+  align-items: center;
+}
+
+.group .group__button {
+  margin-left: auto;
+}

@@ -4,6 +4,8 @@ import {Favorites} from "../favorites/favorites";
 import {User} from "../../types/user";
 import {Search} from "../search/search";
 import {SearchContext} from "../../contexts/searchContext";
+import {Container} from "@material-ui/core";
+import "./style/app.css";
 
 interface AppProps {
     users: Array<User>;
@@ -56,9 +58,19 @@ export class App extends PureComponent<AppProps, AppState> {
             <SearchContext.Provider value={searchValue}>
                 <section className="app">
                     <h1 className="app__title">Список пользователей</h1>
-                    <Search onChange={this.handleSearchChange} />
-                    <ListGroup users={users} />
-                    <Favorites favoriteUsers={favoriteUsers} />
+
+                    <div className="app__wrapper">
+
+                        <div className="app__container-search">
+                            <Search onChange={this.handleSearchChange} />
+                            <ListGroup users={users} />
+                        </div>
+
+                        <div className="app__container-favorites">
+                            <Favorites favoriteUsers={favoriteUsers} />
+                        </div>
+
+                    </div>
                 </section>
             </SearchContext.Provider>
         )

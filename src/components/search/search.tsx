@@ -1,4 +1,7 @@
 import React, {ChangeEvent, FormEvent, PureComponent} from "react";
+import {TextField} from "@material-ui/core";
+import {Button} from "@material-ui/core";
+import "./style/form-search.css";
 
 interface SearchProps {
     onChange: (value: string) => void;
@@ -40,20 +43,22 @@ export class Search extends PureComponent<SearchProps, SearchState> {
     render() {
         const {value} = this.state;
 
+
         return (
             <form className="app__form-search form-search" action="#" onSubmit={this.handleFormSubmit}>
-                <label className="form-search__label" htmlFor="search">
-                    Поиск
-                    <input
-                        value={value}
-                        className="form-search__input"
-                        type="text"
-                        id="search"
-                        onChange={this.handleInputChange}
-                    />
-                </label>
+                <TextField
+                    value={value}
+                    type="text"
+                    id="search"
+                    onChange={this.handleInputChange}
 
-                <button className="form-search__button" type="submit">Искать</button>
+                    classes={{root: "form-search__input"}}
+                    variant="outlined"
+                    label="Поиск"
+                    size="small"
+                />
+
+                <Button type="submit" variant="contained">Искать</Button>
             </form>
         );
     }

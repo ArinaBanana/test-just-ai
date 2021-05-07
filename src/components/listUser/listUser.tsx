@@ -1,6 +1,9 @@
 import React, {PureComponent} from "react";
 import {User as IUser} from "../../types/user";
 import {User} from "../user/user";
+import {Button} from "@material-ui/core";
+import {List} from "@material-ui/core";
+import "./style/listUser.css";
 
 interface ListUserProps {
     users: Array<IUser>;
@@ -48,24 +51,24 @@ export class ListUser extends PureComponent<ListUserProps, ListUserState> {
         const showedCount = users.length - count;
 
         return (
-            <div className="group__list-user list-user">
+            <List classes={{root: "group__list-user list-user"}}>
                 {
                     showedUsers.map((user, index) => (
-                       <User
-                           key={`${user.id}`}
-                           {...user}
-                       />
+                        <User
+                            key={`${user.id}`}
+                            {...user}
+                        />
                     ))
                 }
 
                 {
                     showedCount > 0
                     &&
-                    <button className="list-user__button" type="button" onClick={this.handleButtonClick}>
+                    <Button type="button" onClick={this.handleButtonClick}>
                         Еще {showedCount < SHOW_USERS_COUNT ? showedCount : SHOW_USERS_COUNT} пользователей
-                    </button>
+                    </Button>
                 }
-            </div>
+            </List>
         );
     }
 }

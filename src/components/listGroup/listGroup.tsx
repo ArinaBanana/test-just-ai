@@ -3,6 +3,7 @@ import {User as IUser} from "../../types/user";
 import {Group as IGroup} from "../../types/group";
 import {Group} from "../group/group";
 import {getGroupName} from "../../utils/getGroupName";
+import "./style/listGroup.css"
 
 interface ListGroupProps {
     users: Array<IUser>;

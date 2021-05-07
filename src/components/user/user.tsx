@@ -2,6 +2,11 @@ import React, {PureComponent} from "react";
 import {User as UserProps, UserName} from "../../types/user";
 import {parseDate} from "../../utils/formatUserDate";
 import {SearchContext} from "../../contexts/searchContext";
+import {ListItem} from "@material-ui/core";
+import {ListItemAvatar} from "@material-ui/core";
+import {ListItemText} from "@material-ui/core";
+import {Avatar} from "@material-ui/core";
+import "./style/user.css";
 
 export class User extends PureComponent<UserProps> {
     static contextType = SearchContext;
@@ -31,13 +36,20 @@ export class User extends PureComponent<UserProps> {
         const {before, found, after} = this.getFullName(name);
 
         return(
-            <section className="list-user__user user">
-                <img className="user__images" src={picture.medium} alt="User Avatar" />
-                <p className="user__name">
-                    {before}<span style={{fontWeight: "bold"}}>{found}</span>{after}, дата регистрации: {parsed}
-                </p>
-                <p className="user__email">{email}</p>
-            </section>
+            <ListItem classes={{root: "list-user__wrapper"}}>
+                <section className="list-user__user user">
+                    <ListItemAvatar>
+                        <Avatar src={picture.medium} alt="User Avatar" />
+                    </ListItemAvatar>
+
+                    <ListItemText>
+                        <p className="user__name">
+                            {before}<span style={{fontWeight: "bold"}}>{found}</span>{after}, дата регистрации: {parsed}
+                        </p>
+                        <p className="user__email">{email}</p>
+                    </ListItemText>
+                </section>
+            </ListItem>
         );
     }
 }

@@ -1,0 +1,10 @@
+.form-search {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.form-search .form-search__input {
+  margin-right: 15px;
+  width: 100%;
+}

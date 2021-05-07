@@ -2,6 +2,8 @@ import React, {PureComponent, SyntheticEvent} from "react";
 import {User} from "../../types/user";
 import {ListUser} from "../listUser/listUser";
 import {SearchContext} from "../../contexts/searchContext";
+import {Button} from "@material-ui/core";
+import "./style/group.css";
 
 interface GroupProps {
     groupName: string;
@@ -63,8 +65,19 @@ export class Group extends PureComponent<GroupProps, GroupState> {
 
         return (
             <div className="list-group__group group">
-                <div className="group__name">{groupName}</div>
-                <button className="group__button" type="button" onClick={this.handleButtonClick}>{buttonText}</button>
+                <div className="group__container">
+                    <span className="group__name">{groupName}</span>
+                    <Button
+                        type="button"
+                        onClick={this.handleButtonClick}
+
+                        variant="contained"
+                        classes={{root: "group__button"}}
+                    >
+                        {buttonText}
+                    </Button>
+                </div>
+
                 {
                     showUsers && <ListUser users={users} />
                 }
