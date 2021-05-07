@@ -24,3 +24,9 @@
   justify-content: center;
   height: 100vh;
 }
+
+.app__search-warning {
+  font-size: 20px;
+  text-align: center;
+  display: block;
+}

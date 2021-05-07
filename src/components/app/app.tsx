@@ -88,7 +88,11 @@ export class App extends PureComponent<{}, AppState> {
 
                                 <div className="app__container-search">
                                     <Search onChange={this.handleSearchChange} />
-                                    <ListGroup users={users} />
+                                    {
+                                        users.length === 0
+                                            ? <span className="app__search-warning">Нет совпадений</span>
+                                            : <ListGroup users={users} />
+                                    }
                                 </div>
 
                                 <div className="app__container-favorites">
