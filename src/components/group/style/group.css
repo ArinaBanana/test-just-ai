@@ -5,7 +5,6 @@
 .group__name {
   font-size: 20px;
   color: rgba(0, 0, 0, 0.8);
-
 }
 
 .group__container {
@@ -15,4 +14,8 @@
 
 .group .group__button {
   margin-left: auto;
+}
+
+.group__disabled .group__name {
+  color: rgba(0, 0, 0, 0.5);
 }

@@ -64,7 +64,7 @@ export class Group extends PureComponent<GroupProps, GroupState> {
         const buttonText = showUsers ? "Скрыть" : "Показать";
 
         return (
-            <div className="list-group__group group">
+            <div className={`list-group__group group ${users.length === 0 ? "group_disabled" : ""}`}>
                 <div className="group__container">
                     <span className="group__name">{groupName}</span>
                     <Button
@@ -73,6 +73,7 @@ export class Group extends PureComponent<GroupProps, GroupState> {
 
                         variant="contained"
                         classes={{root: "group__button"}}
+                        disabled={!users.length}
                     >
                         {buttonText}
                     </Button>
