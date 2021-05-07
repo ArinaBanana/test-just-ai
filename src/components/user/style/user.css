@@ -8,6 +8,10 @@
   border-radius: 5px;
 }
 
+.user:hover {
+  background-color: #c5cae9;
+}
+
 .user__name,
 .user__email {
   margin-top: 5px;
@@ -17,4 +21,8 @@
 .user__email {
   font-size: 14px;
   color: rgba(0, 0, 0, 0.5);
+}
+
+.user__name {
+  white-space: nowrap;
 }

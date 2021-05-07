@@ -1,0 +1,8 @@
+.favorites {
+  padding: 10px;
+}
+
+.favorites__title {
+  font-size: 20px;
+  text-align: center;
+}
