@@ -6,27 +6,38 @@ import {Search} from "../search/search";
 import {SearchContext} from "../../contexts/searchContext";
 import {DraggableUserContext} from "../../contexts/draggableUserContext";
 import "./style/app.css";
-
-interface AppProps {
-    users: Array<User>;
-}
+import {getUsers} from "../../api";
+import {CircularProgress} from "@material-ui/core";
 
 interface AppState {
     searchValue: string;
     draggableUser: User | null;
+    users: Array<User>;
+    isLoading: boolean;
 }
 
-export class App extends PureComponent<AppProps, AppState> {
-    constructor(props: AppProps) {
+export class App extends PureComponent<{}, AppState> {
+    constructor(props: {}) {
         super(props);
 
         this.state = {
             searchValue: "",
-            draggableUser: null
+            draggableUser: null,
+            users: [],
+            isLoading: true
         }
 
         this.handleSearchChange = this.handleSearchChange.bind(this);
         this.setDraggableUser = this.setDraggableUser.bind(this);
+    }
+
+    componentDidMount() {
+        getUsers()
+            .then(users => this.setState({
+                users,
+                isLoading: false
+            }))
+            .catch(err => console.log(err));
     }
 
     private handleSearchChange(value: string) {
@@ -36,8 +47,7 @@ export class App extends PureComponent<AppProps, AppState> {
     }
 
     private getFoundUsers() {
-        const {users} = this.props;
-        const {searchValue} = this.state;
+        const {searchValue, users} = this.state;
 
         if (searchValue.length === 0) {
             return users;
@@ -59,7 +69,7 @@ export class App extends PureComponent<AppProps, AppState> {
 
     render() {
         const users = this.getFoundUsers();
-        const {searchValue, draggableUser} = this.state;
+        const {searchValue, draggableUser, isLoading} = this.state;
 
         const draggableContextValue = {
             draggableUser,
@@ -69,22 +79,26 @@ export class App extends PureComponent<AppProps, AppState> {
         return (
             <DraggableUserContext.Provider value={draggableContextValue}>
                 <SearchContext.Provider value={searchValue}>
-                    <section className="app">
-                        <h1 className="app__title">Список пользователей</h1>
 
-                        <div className="app__wrapper">
+                    {
+                        isLoading ? <div className="app__spinner"><CircularProgress /></div> : <section className="app">
+                            <h1 className="app__title">Список пользователей</h1>
 
-                            <div className="app__container-search">
-                                <Search onChange={this.handleSearchChange} />
-                                <ListGroup users={users} />
+                            <div className="app__wrapper">
+
+                                <div className="app__container-search">
+                                    <Search onChange={this.handleSearchChange} />
+                                    <ListGroup users={users} />
+                                </div>
+
+                                <div className="app__container-favorites">
+                                    <Favorites userToAdd={draggableUser} />
+                                </div>
+
                             </div>
+                        </section>
+                    }
 
-                            <div className="app__container-favorites">
-                                <Favorites userToAdd={draggableUser} />
-                            </div>
-
-                        </div>
-                    </section>
                 </SearchContext.Provider>
             </DraggableUserContext.Provider>
         )

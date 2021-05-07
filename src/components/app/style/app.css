@@ -17,3 +17,10 @@
 .app__form-search {
   margin-bottom: 40px;
 }
+
+.app__spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
