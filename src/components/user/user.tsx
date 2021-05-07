@@ -3,7 +3,7 @@ import {User as IUser, UserName} from "../../types/user";
 import {parseDate} from "../../utils/formatUserDate";
 import {SearchContext} from "../../contexts/searchContext";
 import {DraggableUserContext} from "../../contexts/draggableUserContext";
-import {ListItem} from "@material-ui/core";
+import {Button, ListItem} from "@material-ui/core";
 import {ListItemAvatar} from "@material-ui/core";
 import {ListItemText} from "@material-ui/core";
 import {Avatar} from "@material-ui/core";
@@ -29,6 +29,7 @@ const UserName: FC<UserNameProps> = (props) => {
 
 interface UserProps {
     user: IUser;
+    onRemove?: (user: IUser) => void;
 }
 
 export class User extends PureComponent<UserProps> {
@@ -37,6 +38,7 @@ export class User extends PureComponent<UserProps> {
 
         this.handleDragStart = this.handleDragStart.bind(this);
         this.handleDragEnd = this.handleDragEnd.bind(this);
+        this.handleButtonClick =  this.handleButtonClick.bind(this);
     }
 
     static contextType = DraggableUserContext;
@@ -54,8 +56,17 @@ export class User extends PureComponent<UserProps> {
         setDraggableUser(null);
     }
 
+    private handleButtonClick() {
+        const {onRemove, user} = this.props;
+
+        if (onRemove) {
+            onRemove(user);
+        }
+    }
+
     render() {
         const {name, picture, registered, email} = this.props.user;
+        const {onRemove} = this.props;
         const parsed = parseDate(registered.date);
 
         return(
@@ -76,6 +87,8 @@ export class User extends PureComponent<UserProps> {
                                 <UserName name={name} searchValue={searchValue} parsedDate={parsed} />
                                 <p className="user__email">{email}</p>
                             </ListItemText>
+
+                            {onRemove && <Button onClick={this.handleButtonClick}>Удалить</Button>}
                         </section>
                     </ListItem>
                 )}

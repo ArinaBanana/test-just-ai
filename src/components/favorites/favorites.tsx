@@ -24,7 +24,7 @@ export class Favorites extends PureComponent<FavoritesProps, FavoritesState> {
         this.handleDragLeave = this.handleDragLeave.bind(this);
         this.handleDragOver = this.handleDragOver.bind(this);
         this.handleDragDrop = this.handleDragDrop.bind(this);
-
+        this.handleRemoveUser = this.handleRemoveUser.bind(this);
     }
 
     static contextType = DraggableUserContext;
@@ -54,6 +54,22 @@ export class Favorites extends PureComponent<FavoritesProps, FavoritesState> {
         });
     }
 
+    private handleRemoveUser(user: User) {
+        this.setState((prevState) => {
+            const {favoriteUsers} = prevState;
+            const indexUser = favoriteUsers.indexOf(user);
+
+            const copied = [...favoriteUsers];
+            copied.splice(indexUser, 1);
+
+            if (indexUser !== -1) {
+                return {
+                    favoriteUsers: copied
+                }
+            }
+        });
+    }
+
     render() {
         const {favoriteUsers} = this.state;
         const {draggableUser} = this.context;
@@ -71,6 +87,7 @@ export class Favorites extends PureComponent<FavoritesProps, FavoritesState> {
                     onDragLeave={this.handleDragLeave}
                     onDragOver={this.handleDragOver}
                     onDrop={this.handleDragDrop}
+                    onRemove={this.handleRemoveUser}
                 >
                 </ListUser>
             </div>
